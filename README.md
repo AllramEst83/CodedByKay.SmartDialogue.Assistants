@@ -54,7 +54,7 @@ public void ConfigureServices(IServiceCollection services)
     {
         // All values are default for the CodedByKay.SmartDialogue.Assistants library
         options.OpenAiApiKey = "your_openai_api_key_here";
-        options.Model = "gpt-3.5-turbo";
+        options.OpenAIAssistantId = "assistant_id";
         options.OpenAIApiUrl = "https://api.openai.com/v1/";
         options.MaxTokens = 2000;
         options.AverageTokeLenght = 2.85;
