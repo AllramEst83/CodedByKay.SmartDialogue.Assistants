@@ -2,9 +2,19 @@
 
 ## Overview
 
-`CodedByKay.SmartDialogue` is a .NET class library designed to facilitate easy communication with the OpenAI Assistant API, integrating seamlessly into .NET web applications. It supports sending messages, receiving responses, and maintaining a chat history.
+This project offers a comprehensive solution for integrating smart dialogue assistants and chat history management into .NET applications. Designed with modularity and extensibility in mind, it lays the groundwork for developers to create rich, interactive chat applications that can engage users with AI-powered conversations while maintaining an accessible history of these interactions.
 
-## Features
+At the heart of the project are four key components:
+
+- **ChatHistoryService**: Manages the storage and retrieval of chat conversations, providing a seamless experience for users to access their chat histories.
+- **SmartDialogueAssistantsService**: Powers the integration of AI-driven dialogue assistants, enhancing user interactions with smart, context-aware responses.
+- **CodedByKaySmartDialogueAssistantsExtensions**: Offers extension methods to simplify the integration and management of dialogue assistants within the application, emphasizing ease of use and developer productivity.
+- **SmartDialogueServiceFactory**: Implements the factory pattern to efficiently manage the creation and lifecycle of smart dialogue service instances, ensuring scalability and maintainability.
+
+Designed for scalability, this project supports a wide range of applications, from customer service bots to interactive educational tools, making it a versatile choice for developers looking to leverage the power of AI in their chat solutions.
+
+Whether you're building a simple chat application or a complex interactive assistant, this project provides the necessary components and architecture to incorporate advanced chat functionalities with minimal overhead, allowing you to focus on creating engaging and meaningful user experiences.
+
 
 ### Core Features
 
