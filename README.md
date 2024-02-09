@@ -11,11 +11,6 @@ At the heart of the project are four key components:
 - **CodedByKaySmartDialogueAssistantsExtensions**: Offers extension methods to simplify the integration and management of dialogue assistants within the application, emphasizing ease of use and developer productivity.
 - **SmartDialogueServiceFactory**: Implements the factory pattern to efficiently manage the creation and lifecycle of smart dialogue service instances, ensuring scalability and maintainability.
 
-Designed for scalability, this project supports a wide range of applications, from customer service bots to interactive educational tools, making it a versatile choice for developers looking to leverage the power of AI in their chat solutions.
-
-Whether you're building a simple chat application or a complex interactive assistant, this project provides the necessary components and architecture to incorporate advanced chat functionalities with minimal overhead, allowing you to focus on creating engaging and meaningful user experiences.
-
-
 ### Core Features
 
 - **Middleware Integration**: Easily integrates into the middleware pipeline of a .NET web application.
