@@ -1,0 +1,13 @@
+﻿using CodedByKay.SmartDialogue.Assistants.Models;
+
+namespace CodedByKay.SmartDialogue.Assistants.Interfaces
+{
+    public interface IChatHistoryService
+    {
+        bool AddChatMessage(string message, Guid chatId, MessageType messageType);
+        List<ChatMessage> GetChatMessages(Guid chatId);
+        bool DeleteChatHistoryById(Guid chatId);
+        void DeleteAllChatHistories();
+        void ReCalculateHistoryLength(Guid chatId, int maxTokenCount);
+    }
+}
