@@ -50,9 +50,9 @@ Then, add `CodedByKay.SmartDialogue.Assistants` to your service collection:
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddSmartDialogue(options =>
+    services.AddSmartDialogueAssistants(options =>
     {
-        // All values are default for the AddSmartDialogue library
+        // All values are default for the CodedByKay.SmartDialogue.Assistants library
         options.OpenAiApiKey = "your_openai_api_key_here";
         options.Model = "gpt-3.5-turbo";
         options.OpenAIApiUrl = "https://api.openai.com/v1/";
