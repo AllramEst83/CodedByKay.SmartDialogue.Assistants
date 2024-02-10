@@ -8,7 +8,7 @@ namespace CodedByKay.SmartDialogue.Assistants.Models
         public string AssistantId { get; set; } = "";
 
         [JsonProperty("thread")]
-        public AssistantThread Thread { get; set; } = new AssistantThread();
+        public AssistantThread AssistantThread { get; set; } = new AssistantThread();
     }
 
     internal class AssistantThread
@@ -20,7 +20,7 @@ namespace CodedByKay.SmartDialogue.Assistants.Models
     internal class ThreadMessage
     {
         [JsonProperty("role")]
-        public string Role { get; set; } = "user";
+        public string Role { get; set; } = "";
 
         [JsonProperty("content")]
         public string Content { get; set; } = "";

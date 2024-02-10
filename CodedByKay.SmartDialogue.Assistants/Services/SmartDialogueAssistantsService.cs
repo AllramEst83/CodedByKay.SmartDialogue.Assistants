@@ -2,10 +2,7 @@
 using CodedByKay.SmartDialogue.Assistants.Interfaces;
 using CodedByKay.SmartDialogue.Assistants.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
 using System.Text;
-using System.Threading;
 
 namespace CodedByKay.CodedByKay.SmartDialogue.Assistants.Services
 {
@@ -30,15 +27,14 @@ namespace CodedByKay.CodedByKay.SmartDialogue.Assistants.Services
         /// </summary>
         /// <param name="chatId">The chat identifier.</param>
         /// <param name="message">The message to send.</param>
-        /// <param name="messageType">The type of the message.</param>
         /// <returns>The model's response to the chat message.</returns>
-        public async Task<string> SendChatMessageAsync(Guid chatId, string message, MessageType messageType)
+        public async Task<string> SendChatMessageAsync(Guid chatId, string message)
         {
             // Log the user's message to the chat history
             _chatHistoryService.AddChatMessage(message, chatId, MessageType.User);
 
             // Create request data for the assistant model
-            var requestData = CreateAssistantRequestData(message);
+            var requestData = CreateAssistantRequestData(message, chatId);
             var data = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
 
             // Post the thread run and wait for completion
@@ -56,18 +52,34 @@ namespace CodedByKay.CodedByKay.SmartDialogue.Assistants.Services
         /// Creates the assistant request data model for the given message.
         /// </summary>
         /// <param name="message">The message to send to the assistant.</param>
+        /// <param name="chatId">The unique identifier for the chat.</param>
         /// <returns>The request data model for the assistant.</returns>
-        private AssistantModel CreateAssistantRequestData(string message)
+        private AssistantModel CreateAssistantRequestData(string message, Guid chatId)
         {
+            // Log the user's message to chat history
+            var messages = _chatHistoryService.GetChatMessages(chatId);
+
+            // Initialize the list
+            var threadMessages = new List<ThreadMessage>();
+
+            // Convert each ChatMessage to a ThreadMessage and add it to the list
+            if (messages.Count != 0)
+            {
+                // Filter and convert only the user's ChatMessage to ThreadMessage and add them to the list
+                var userMessages = messages.Where(chatMessage => chatMessage.MessageType == MessageType.User);
+                threadMessages.AddRange(userMessages.Select(chatMessage => new ThreadMessage
+                {
+                    Role = chatMessage.MessageType.ToString().ToLower(),
+                    Content = chatMessage.Message
+                }));
+            }
+
             return new AssistantModel
             {
                 AssistantId = _options.OpenAIAssistantId,
-                Thread = new AssistantThread
+                AssistantThread = new()
                 {
-                    ThreadMessages = new List<ThreadMessage>
-                    {
-                        new() {Role = MessageType.User.ToString().ToLower(), Content = message}
-                    }
+                    ThreadMessages = threadMessages
                 }
             };
         }
@@ -113,7 +125,7 @@ namespace CodedByKay.CodedByKay.SmartDialogue.Assistants.Services
                 }
                 else
                 {
-                    await Task.Delay(1000);
+                    await Task.Delay(500);
                 }
             }
         }
@@ -137,7 +149,7 @@ namespace CodedByKay.CodedByKay.SmartDialogue.Assistants.Services
             }
 
             return messages.Data
-                .Where(m => m.Role == MessageType.User.ToString().ToLower())
+                .Where(m => m.Role == MessageType.Assistant.ToString().ToLower())
                 .SelectMany(m => m.Content)
                 .Aggregate(string.Empty, (current, item) => current + item.Text.Value);
         }
