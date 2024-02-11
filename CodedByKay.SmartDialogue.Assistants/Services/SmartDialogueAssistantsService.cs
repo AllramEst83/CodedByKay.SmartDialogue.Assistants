@@ -23,6 +23,41 @@ namespace CodedByKay.CodedByKay.SmartDialogue.Assistants.Services
         private readonly HttpClient _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 
         /// <summary>
+        /// Asynchronously retrieves a list of assistants from a specified endpoint.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="AssistantListResponse"/> object.</returns>
+        /// <exception cref="HttpRequestException">Thrown when the response is not a success status code.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the deserialized <see cref="AssistantListResponse"/> is null.</exception>
+        /// <remarks>
+        /// This method sends a GET request to the "assistants" endpoint and expects a JSON response
+        /// conforming to the <see cref="AssistantListResponse"/> class structure. Ensure the endpoint
+        /// correctly implements the expected data format. This method utilizes <see cref="System.Net.Http.HttpClient"/>
+        /// for the network request and requires proper initialization of the HttpClient instance,
+        /// including base address and authorization headers as needed.
+        /// </remarks>
+        public async Task<AssistantListResponse> ListAssistants()
+        {
+            // Send a GET request to the "assistants" endpoint.
+            var response = await _httpClient.GetAsync("assistants");
+
+            // Ensure the response status code indicates success, otherwise, an HttpRequestException will be thrown.
+            response.EnsureSuccessStatusCode();
+            
+            // Read the response content as a string asynchronously.
+            var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            // Deserialize the JSON response into an AssistantListResponse object.
+            var assistantsResponse = JsonConvert.DeserializeObject<AssistantListResponse>(responseBody);
+
+            // Check if the deserialization result is null, which indicates an unexpected response format.
+            if (assistantsResponse == null)
+            {
+                throw new Exception("AssistantListResponse is null.");
+            }
+            // Return the deserialized AssistantListResponse object.
+            return assistantsResponse;
+        }
+
+        /// <summary>
         /// Sends a chat message asynchronously, logs it, and gets a response from an AI model.
         /// </summary>
         /// <param name="chatId">The chat identifier.</param>
