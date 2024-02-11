@@ -26,7 +26,7 @@ At the heart of the project are four key components:
 - **Asynchronous Communication**: Communicates asynchronously with the OpenAI Assistant API.
 - **Secure API Key Management**: Offers a secure way to manage and use your OpenAI API key.
 - **Chat History Management**: Utilizes a `ConcurrentDictionary` for efficient and thread-safe chat history management.
-- **Manage your OpenAI assistants by listing your assistants connected to your OpenAI api key.
+- **Manage your OpenAI assistants** by listing your assistants connected to your OpenAI api key.
 
 ### OpenAI API Communication
 
