@@ -12,7 +12,7 @@
     <Product>Smart Dialogue Assistants Library</Product>
     <Description>SmartDialogueAssistants is an alpha version class library designed to facilitate easy integration with OpenAI's Assistants API, enabling developers to build intelligent dialog systems. This package is currently under development and subject to changes.</Description>
     <PackageTags>OpenAI;Chatbot;AI;Dialog;SmartDialogue;CodedByKay</PackageTags>
-    <RepositoryUrl>https://github.com/AllramEst83/CodedByKay.SmartDialogueLib</RepositoryUrl>
+    <RepositoryUrl>https://github.com/AllramEst83/CodedByKay.SmartDialogue.Assistants</RepositoryUrl>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
